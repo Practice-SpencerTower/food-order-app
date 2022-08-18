@@ -19,7 +19,7 @@ function App() {
 
     return (
         <>
-            {cartIsShown && <Cart />}
+            {cartIsShown && <Cart hideCartHandler={hideCartHandler} />}
             <Header showCartHandler={showCartHandler} />
             <main>
                 <Meals />
