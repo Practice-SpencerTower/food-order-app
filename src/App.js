@@ -15,10 +15,12 @@ function App() {
         setCartIsShown(false);
     };
 
+    console.log('CARTISSHOWN', cartIsShown);
+
     return (
         <>
             {cartIsShown && <Cart />}
-            <Header />
+            <Header showCartHandler={showCartHandler} />
             <main>
                 <Meals />
             </main>
