@@ -7,8 +7,9 @@ const HeaderCartButton = (props) => {
     const [btnHighlighted, setBtnHighlighted] = useState(false);
     const cartCtx = useContext(CartContext);
 
+    const { items } = cartCtx;
     // translate items into single number - accounts for multiple counts of different meals
-    const numCartItems = cartCtx.items.reduce((currNumber, item) => {
+    const numCartItems = items.reduce((currNumber, item) => {
         return currNumber + item.amount;
     }, 0);
 
@@ -17,8 +18,18 @@ const HeaderCartButton = (props) => {
     }`;
     // use timer to add / remove class that triggers animation
     useEffect(() => {
+        if (items.length === 0) return;
         setBtnHighlighted(true);
-    }, []);
+
+        const timer = setTimeout(() => {
+            setBtnHighlighted(false);
+        }, 300);
+
+        // clean-up function
+        return () => {
+            clearTimeout(timer);
+        };
+    }, [items]);
 
     return (
         <button className={classes.btnClasses} onClick={props.showCartHandler}>
