@@ -11,7 +11,9 @@ const Cart = (props) => {
     const hasItems = cartCtx.items.length > 0;
 
     // functions to add and remove items from the cart
-    const removeItemHandler = (id) => {};
+    const removeItemHandler = (id) => {
+        cartCtx.removeItem(id);
+    };
 
     const addItemHandler = (item) => {
         cartCtx.addItem({ ...item, amount: 1 });
