@@ -12,6 +12,17 @@ const AvailableMeals = () => {
             );
             // convert response to JSON
             const responseData = await (await response).json();
+
+            // transform json to array
+            const loadedMeals = [];
+            for (const key in responseData) {
+                loadedMeals.push({
+                    id: key,
+                    name: responseData[key].name,
+                    description: responseData[key].description,
+                    price: responseData[key].price,
+                });
+            }
         };
         fetchMeals();
     }, []);
