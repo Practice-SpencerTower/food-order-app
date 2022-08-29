@@ -7,9 +7,11 @@ import classes from './AvailableMeals.module.css';
 const AvailableMeals = () => {
     useEffect(() => {
         const fetchMeals = async () => {
-            fetch(
+            const response = fetch(
                 'https://react-http-9f7be-default-rtdb.firebaseio.com/meals.json'
-            ).then(() => {});
+            );
+            // convert response to JSON
+            const responseData = await (await response).json();
         };
         fetchMeals();
     }, []);
