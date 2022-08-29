@@ -18,7 +18,6 @@ const AvailableMeals = () => {
             // check for http error
             if (!response.ok) {
                 throw new Error('Something went wrong!'); // lines after wont execute
-                
             }
             // convert response to JSON
             const responseData = await (await response).json();
@@ -36,6 +35,14 @@ const AvailableMeals = () => {
             setMeals(loadedMeals);
             setIsLoading(false);
         };
+
+        try {
+            fetchMeals();
+        } catch (error) {
+            setIsLoading(false);
+            setHttpError(error);
+        }
+
         fetchMeals();
     }, []);
 
@@ -43,6 +50,14 @@ const AvailableMeals = () => {
         return (
             <section className={classes.mealsLoading}>
                 <p>Loading...</p>
+            </section>
+        );
+    }
+
+    if (httpError) {
+        return (
+            <section className={classes.mealsError}>
+                <p>{httpError}</p>
             </section>
         );
     }
