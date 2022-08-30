@@ -22,9 +22,12 @@ const Checkout = (props) => {
                 <label htmlFor="city">City</label>
                 <input type="text" id="city" />
             </div>
-            <button type="button" onClick={props.hideCartHandler}>
-                Confirm
-            </button>
+            <div className={classes.actions}>
+                <button type="button" onClick={props.hideCartHandler}>
+                    Cancel
+                </button>
+                <button className={classes.submit}>Confirm</button>
+            </div>
         </form>
     );
 };
