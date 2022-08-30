@@ -3,6 +3,7 @@ import classes from './Cart.module.css';
 import Modal from '../UI/Modal';
 import CartContext from '../../store/cart-context';
 import CartItem from './CartItem';
+import Checkout from './Checkout';
 
 const Cart = (props) => {
     const cartCtx = useContext(CartContext);
@@ -41,6 +42,7 @@ const Cart = (props) => {
                 <span>Total Amount</span>
                 <span>{totalAmout}</span>
             </div>
+            <Checkout />
             <div className={classes.actions}>
                 <button
                     className={classes['button-alt']}
