@@ -40,6 +40,23 @@ const Cart = (props) => {
         </ul>
     );
 
+    // conditionally rendered
+    const modalActions = (
+        <div className={classes.actions}>
+            <button
+                className={classes['button-alt']}
+                onClick={props.hideCartHandler}
+            >
+                Close
+            </button>
+            {hasItems && (
+                <button className={classes.button} onClick={orderHandler}>
+                    Order
+                </button>
+            )}
+        </div>
+    );
+
     return (
         <Modal>
             {cartItems}
@@ -48,19 +65,7 @@ const Cart = (props) => {
                 <span>{totalAmout}</span>
             </div>
             {isCheckout && <Checkout />}
-            <div className={classes.actions}>
-                <button
-                    className={classes['button-alt']}
-                    onClick={props.hideCartHandler}
-                >
-                    Close
-                </button>
-                {hasItems && (
-                    <button className={classes.button} onClick={orderHandler}>
-                        Order
-                    </button>
-                )}
-            </div>
+            {!isCheckout && modalActions}
         </Modal>
     );
 };
