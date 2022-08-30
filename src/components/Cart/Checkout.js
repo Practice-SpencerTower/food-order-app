@@ -1,7 +1,18 @@
+import { useRef, useState } from 'react';
 import classes from './Checkout.module.css';
-import { useRef } from 'react';
+
+// validator helper functions
+const isEmpty = (value) => value.trim() === '';
+const isFiveChars = (value) => value.length === 5;
 
 const Checkout = (props) => {
+    const [formInputValidity, setFormInputValidity] = useState({
+        name: true,
+        street: true,
+        city: true,
+        postal: true,
+    });
+
     const nameInputRef = useRef();
     const streetInputRef = useRef();
     const postalInputRef = useRef();
@@ -9,6 +20,33 @@ const Checkout = (props) => {
 
     const confirmHandler = (event) => {
         event.preventDefault();
+        const enteredName = nameInputRef.current.value;
+        const enteredStreet = streetInputRef.current.value;
+        const enteredPostal = postalInputRef.current.value;
+        const enteredCity = cityInputRef.current.value;
+
+        const enteredNameIsValid = !isEmpty(enteredName);
+        const enteredStreetIsValid = !isEmpty(enteredStreet);
+        const enteredCityIsValid = !isEmpty(enteredCity);
+        const enteredPostalIsValid = isFiveChars(enteredPostal);
+
+        setFormInputValidity({
+            name: enteredNameIsValid,
+            street: enteredStreetIsValid,
+            city: enteredCityIsValid,
+            postal: enteredPostalIsValid,
+        });
+
+        const formIsValid =
+            enteredNameIsValid &&
+            enteredStreetIsValid &&
+            enteredCityIsValid &&
+            enteredPostalIsValid;
+        if (!formIsValid) {
+            return;
+        }
+
+        // Submit cart data
     };
     return (
         <form className={classes.form} onSubmit={confirmHandler}>
