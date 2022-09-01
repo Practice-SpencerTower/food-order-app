@@ -56,7 +56,7 @@ const Cart = (props) => {
                     addItemHandler={addItemHandler.bind(null, item)}
                 />
             ))}
-        </ul>
+        </ul> 
     );
 
     // conditionally rendered
